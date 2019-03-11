@@ -11,6 +11,12 @@ class User extends Model
     public $password;
     public $email;
 
+    /**
+     * Функция производит валидацию данных
+     *
+     * @param $key
+     * @param $value
+     */
     protected function validate($key, $value)
     {
         switch ($key) {

@@ -49,4 +49,29 @@ class Article extends Model
     {
         return array_reverse(array_slice(static::findAll(), -$num));
     }
+
+    /**
+     * Функция производит валидацию данных
+     *
+     * @param $key
+     * @param $value
+     */
+    protected function validate($key, $value)
+    {
+        switch ($key) {
+            case 'title':
+                if (strlen(trim($value)) === 0) {
+                    $this->errors->add(new \Exception('Заголовок не указан'));
+                }
+                if (strlen(trim($value)) > 255) {
+                    $this->errors->add(new \Exception('Слишком длинный заголовок'));
+                }
+                break;
+            case 'body':
+                if (strlen(trim($value)) < 255) {
+                    $this->errors->add(new \Exception('Мало текста в статье'));
+                }
+                break;
+        }
+    }
 }

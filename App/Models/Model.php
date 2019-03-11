@@ -48,9 +48,7 @@ abstract class Model
      * @param $key
      * @param $value
      */
-    protected function validate($key, $value)
-    {
-    }
+    abstract protected function validate($key, $value);
 
     /**
      * Функция возвращает все записи из таблицы
