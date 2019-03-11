@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 
+use App\Exceptions\NotFoundException;
 use App\Models\Article as ArticleModel;
 
 class Save extends Controller
@@ -11,6 +12,11 @@ class Save extends Controller
     {
         if (isset($_POST['id'])) {
             $article = ArticleModel::findById($_POST['id']);
+
+            if (empty($article)) {
+                throw new NotFoundException('Не удалось найти запись с id ' . $_POST['id']);
+            }
+
         } else {
             $article = new ArticleModel;
         }

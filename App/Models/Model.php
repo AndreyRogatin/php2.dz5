@@ -77,12 +77,7 @@ abstract class Model
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         $params = [':id' => $id];
         $res = $db->query($sql, $params, static::class);
-
-        if (empty($res)) {
-            throw new NotFoundException('Не удалось найти запись с id ' . $id . ' в таблице ' . static::$table);
-        } else {
-            return $res[0];
-        }
+        return $res[0] ?? false;
     }
 
     /**
